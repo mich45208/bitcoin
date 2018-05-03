@@ -70,7 +70,7 @@ add_custom_command(
         WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-
+add_library(pouw ${SOURCE_FILES})
 add_executable(pouw-test ${SOURCE_FILES})
 
 if (NOT SGX_MODE STREQUAL HW)
