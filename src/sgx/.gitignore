@@ -3,3 +3,10 @@ test
 bin/
 build/
 !Makefile.*
+cmake_install.cmake
+CMakeCache.txt
+Enclave_u.c
+Enclave_u.h
+Enclave_t.c
+Enclave_t.h
+pouw-test

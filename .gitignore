@@ -4,6 +4,7 @@
 *.a
 *.la
 
+CMakeFiles/
 src/.directory
 src/Makefile.qt.include
 src/Makefile.qttest.include

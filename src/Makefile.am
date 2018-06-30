@@ -20,9 +20,10 @@ $(LIBLEVELDB) $(LIBMEMENV):
 endif
 
 # added by Fan to compile SGX stuff as an external library
-LIBPOUW_SGX_LDFLAGS = -L/opt/intel/sgxsdk/lib64 -lsgx_urts -lsgx_uae_service -L/usr/local/lib -lrestclient-cpp -lcrypto 
+LIBPOUW_SGX_LDFLAGS = -L/opt/intel/sgxsdk/lib64 -lsgx_urts -lsgx_uae_service -L/usr/local/lib -lrestclient-cpp -lcrypto
 
-LIBPOUW_SGX = $(builddir)/sgx/pouw.a
+LIBPOUW_SGX = $(builddir)/sgx/libpouw.a
+# LIBPOUW_SGX = $(builddir)/sgx/pouw.a
 $(LIBPOUW_SGX): FORCE
 	@$(MAKE) -BC $(@D)
 	@cp -f $(builddir)/sgx/Enclave/enclave.signed.so .
@@ -51,7 +52,7 @@ LIBUNIVALUE=univalue/libunivalue.la
 
 $(LIBSECP256K1): $(wildcard secp256k1/src/*) $(wildcard secp256k1/include/*)
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C $(@D) $(@F)
-  
+
 $(LIBUNIVALUE): $(wildcard univalue/lib/*) $(wildcard univalue/include/*)
 	$(AM_V_at)$(MAKE) $(AM_MAKEFLAGS) -C $(@D) $(@F)
 
@@ -347,7 +348,7 @@ nodist_libbitcoin_util_a_SOURCES = $(srcdir)/obj/build.h
 bitcoind_SOURCES = bitcoind.cpp
 bitcoind_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 bitcoind_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-bitcoind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) 
+bitcoind_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
 bitcoind_SOURCES += bitcoind-res.rc
@@ -381,7 +382,7 @@ bitcoind_LDADD += $(LIBPOUW_SGX) $(LIBPOUW_SGX_LDFLAGS)
 bitcoin_cli_SOURCES = bitcoin-cli.cpp
 bitcoin_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
 bitcoin_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-bitcoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) 
+bitcoin_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
 bitcoin_cli_SOURCES += bitcoin-cli-res.rc
@@ -400,7 +401,7 @@ bitcoin_cli_LDADD += $(LIBPOUW_SGX) $(LIBPOUW_SGX_LDFLAGS)
 bitcoin_tx_SOURCES = bitcoin-tx.cpp
 bitcoin_tx_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
 bitcoin_tx_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-bitcoin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS) 
+bitcoin_tx_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
 if TARGET_WINDOWS
 bitcoin_tx_SOURCES += bitcoin-tx-res.rc
